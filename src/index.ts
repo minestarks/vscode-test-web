@@ -311,6 +311,11 @@ async function openBrowser(endpoint: string, options: Options, configPage?: (pag
 			console.log(message.text());
 		});
 	}
+	page.on('request', (request) => {
+		if (!request.url().startsWith('http://localhost')) {
+			console.log("REQUEST: " + request.url());
+		}
+	});
 
 	await page.goto(endpoint);
 
